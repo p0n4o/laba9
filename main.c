@@ -39,6 +39,8 @@ int make_file() {
     long n;
     char k[20];
     char str[100];
+    char null = '\0';
+    char ent = '\n';
     printf("Число строк:\n");
     fgets(k, 20, stdin);
     n = make_int(is_int(k), k);
@@ -47,11 +49,13 @@ int make_file() {
         printf("Введите %d-ую строку:\n", i + 1);
         if (i == n - 1) {
             fgets(str, 100, stdin);
-            fprintf(cur_file, "%s", strtok(str, "\n"));
+            if (*str == '\n') fprintf(cur_file, &null);
+            else fprintf(cur_file, "%s", strtok(str, "\n"));
         }
         else {
             fgets(str, 100, stdin);
-            fprintf(cur_file, "%s", &str);
+            if (*str == '\n') fprintf(cur_file, &ent);
+            else fprintf(cur_file, "%s", str);
         }
     }
     fclose(cur_file);
@@ -183,5 +187,3 @@ int main(void) {
     return 0;
 }
 
-//   aaaaa     aa   aaaa   aaee ae io
-//   oi    aaiaaiaa    io   ue
